@@ -1,0 +1,62 @@
+#container{
+	width:80%;
+	padding: 20px;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 3%;
+}
+h1{
+	padding: 30px;
+	text-align: center;
+	font-size: 28px;
+}
+body{
+	color: #06db4d;
+	background-color: black;
+}
+div{
+	text-align: center;
+	font-family: "Helvetica Neue";
+}
+#Wins{
+	text-align: left;
+	color: #1994fb;
+}
+#Loses{
+	text-align: left;
+	color:red;
+}
+#text{
+	text-align: center;
+}
+#emptyBox{
+	color:white;
+	background-color: #067fff;
+	border-radius: 50px;
+}
+.block{
+	display: inline-block;
+	font-size: 50px;
+	width: 40px;
+	margin: 10px;
+}
+#emptyGuess{
+	font-size: 30px;
+}
+#emptyHeart{
+
+}
+.hearts{
+	width: 25px;
+}
+#guessLetters{
+
+}
+#LettersTried{
+	text-align: left;
+	background-color: #06db4d;
+	color: white;
+	border-radius: 50px;
+	margin:auto;
+}

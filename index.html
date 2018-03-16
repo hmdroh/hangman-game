@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head><title>Hangman</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <h1> Type to guess the name of a fruit: </h1>
+    <div id=container>
+    Wins: <span id="Wins"></span><br>
+    Loses: <span id="Loses"></span><br>
+    Remaining: <span id="Remaining"></span><br>
+    Tried: <span id="LettersTried"></span><br><br>
+
+    Find: <span id="blankText"></span><br><br><br>
+    Check console for more codes.
+</div>
+    <script>
+
+        var trys = 10;
+        var loses = 0;
+        var wins = 0;
+        var pressedKeys = [];
+        var pK = "";
+
+        function displayResults(){
+           document.getElementById("Wins").innerHTML = wins;
+           document.getElementById("Loses").innerHTML = loses;
+           document.getElementById("Remaining").innerHTML = trys;
+           document.getElementById("blankText").innerHTML = blankArray;
+
+            
+           
+        }
+
+        function randomizeWord() {
+            //randomize the word selection
+            var words = ["Apple", "Orange", "Banana", "Kiwi", "Mango", "Carrot", "Melon"];
+            var i = Math.floor(Math.random()*words.length);
+            return words[i];
+        }
+
+//run code
+        processWord(randomizeWord());
+        displayResults();
+
+        //process the word
+
+        function processWord(word) {
+            //put letters in array.
+            word = word.toLowerCase();
+            var wordArray = word.split("");
+            var pressedKeys = [];
+            console.log(wordArray);
+            //make empty array same lenght
+            blankArray = [];
+            for (var i = 0; wordArray.length > i; i++) {
+                blankArray.push(" _ ");
+            }
+
+
+            console.log(blankArray);
+
+
+            //on keypress check if the word exist in letter array
+            document.onkeyup = function getKeyPressed(key) {
+                var keyP = String.fromCharCode(key.keyCode);
+                keyP = keyP.toLowerCase();
+                console.log(keyP);
+                searchLetter(keyP);
+            }
+
+
+            //find index of letter
+            function searchLetter(keyP) {
+                if (trys === 0) {
+                    trys = 10;
+                    loses++;
+                    processWord(randomizeWord());
+                    displayResults();
+                    console.log("wins:" + wins);
+                    console.log("loses:" + loses);
+                    //tries finished reset
+                } else {
+
+                    for (var i = 0; i < wordArray.length; i++) {
+                        var cL = wordArray[i];
+                        if (cL === keyP) {
+                            //word is correct change arrayBlank to the letter pressed correct.
+                            blankArray[i] = cL;
+
+                            //check if all the letters finished? and reset two arrows are same.
+
+                            var equal = true;
+                            for (var x = 0; x < wordArray.length; x++) {
+                                if (equal === true) {
+
+                                    if (wordArray[x] === blankArray[x]) {
+                                        
+                                    }else{
+                                        equal = false;
+                                    }
+                                }
+                            }
+
+                            if (equal===true) {
+                                trys = 10;
+                                wins++;
+                                processWord(randomizeWord());
+                                displayResults();
+                                console.log("wins:" + wins);
+                                console.log("loses:" + loses);
+                            }
+
+
+                        } else {
+                            //check if the letter has been pressed
+                            if (pressedKeys.indexOf(keyP) >= 0) {
+                                //already pressed do nothing
+                            } else {
+                                //add it to pressedKeys
+                                if (wordArray.indexOf(keyP) < 0) {
+                                    pressedKeys.push(keyP);
+                                    trys--;
+                                }
+                            }
+                        }
+                    }
+                    displayResults();
+                    console.log(blankArray);
+                    console.log(pressedKeys);
+                    console.log("tries left: " + trys);
+                }            
+}
+
+            
+        }
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
